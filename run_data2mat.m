@@ -1,0 +1,31 @@
+% --- Adjust this path ---
+base = '/media/silversurfer42/Sandisk P/neuro/frailty/data/for_brainage';
+
+% Release tag must match the folder names created by the Python script
+release = '_CAT12.9';
+
+% Data folders to concatenate (order matters and must match label concatenation)
+D = struct();
+D.data    = { fullfile(base, 'D'), fullfile(base, 'K') };  % change if you only have one group
+D.release = release;
+D.name    = 'brainage_export'; % base name for .mat outputs
+
+% Choose segments and processing options
+D.seg  = {'rp1','rp2'};  % GM and WM copied as rp1_*, rp2_*
+D.fwhm = {8};            % smoothing (mm)
+D.res  = {8};            % resampling (mm)
+
+% Load fake labels created by prepare_brainage.py
+age_D  = load(fullfile(base, 'fake_labels', 'age_D.txt'));
+male_D = load(fullfile(base, 'fake_labels', 'male_D.txt'));
+age_K  = load(fullfile(base, 'fake_labels', 'age_K.txt'));
+male_K = load(fullfile(base, 'fake_labels', 'male_K.txt'));
+
+D.age  = [age_D;  age_K];   % concatenate in the same order as D.data
+D.male = [male_D; male_K];
+
+% Optional: restrict age range (keeps files/labels in sync)
+% D.age_range = [60 95];
+
+% Run conversion (will create e.g., s8rp1_8mm_brainage_export_CAT12.9.mat, etc.)
+BA_data2mat(D);
