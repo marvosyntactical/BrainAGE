@@ -583,6 +583,9 @@ for i = 1:numel(D.res_array)
         end
         
         % build index for test data
+	% NOTE FIXME TODO:
+	% Hack ind_test to exclude HCs (n_groups-1 instead of n_groups)
+
         ind_test = [];
         for o = 1:n_groups
           if size(D.ind_groups{o},1) < size(D.ind_groups{o},2)
@@ -590,6 +593,7 @@ for i = 1:numel(D.res_array)
           end
           ind_test = [ind_test; D.ind_groups{o}];
         end
+
                                 
 
         if numel(D.age_range) ~=2
@@ -620,6 +624,12 @@ for i = 1:numel(D.res_array)
            
         % print information about training sample only once for D.threshold_std == Inf or otherwise always
         if D.verbose && (i==1 && j==1 && k==1) || isfinite(D.threshold_std)
+	  % NOTE FIXME TODO:
+	  % printing array shapes and entries of index array
+	  size(age)
+	  size(ind_test)
+	  ind_test
+	  
           % only use selected data
           age_test = age(ind_test);
           fprintf('\n%d subjects used for training (age %3.1f..%3.1f years)\n',length(D.age_train),min(D.age_train),max(D.age_train));
@@ -713,6 +723,8 @@ for i = 1:numel(D.res_array)
           if length(D.ind_groups{o}) < 10
             allow_violin = 0;
           end
+	  ind_groups
+	  D.ind_groups{o}
           ind_groups = [ind_groups; D.ind_groups{o}];
           data_cell{o} = BrainAGE(D.ind_groups{o},:);
           avg_BrainAGE(o,:) = mean(BrainAGE(D.ind_groups{o},:));

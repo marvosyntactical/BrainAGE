@@ -1,0 +1,66 @@
+--------------------------------------------------------------
+Data:         	allgroups_CAT12.9
+Resolution:   	8 
+Smoothing:    	s8 
+Segmentation:  	rp1 rp2 
+Threshold-Std:	Inf
+Training-Data:	healthycontrol 
+Model-Weight: 	5
+PCA:           	1 (method: svd)
+Trend method:  	1
+Age-Range:     	0-Inf
+--------------------------------------------------------------
+
+
+30 subjects used for training (age 68.0..91.0 years)
+Mean age	76.3667 (SD 6.38686) years
+Males/Females	9/21
+
+
+81 subjects used for prediction (age 65.0..93.0 years)
+Mean age	79.1975 (SD 6.8473) years
+Males/Females	3043/-2962
+
+8 s8 rp1 | test data: n=30 MAE/corr: 3.412/0.856
+
+T-test P-value (one-tailed) 
+               Group	                   D	                   F	                  FD	                   K	
+                   D	                 0.5	            0.979869  *	            0.700079	            0.328967	
+                   F	           0.0201306  *	                 0.5	           0.0818516	         0.000853256***	
+                  FD	            0.299921	            0.918148	                 0.5	            0.148069	
+                   K	            0.671033	            0.999147***	            0.851931	                 0.5	
+8 s8 rp2 | test data: n=30 MAE/corr: 4.164/0.752
+
+T-test P-value (one-tailed) 
+               Group	                   D	                   F	                  FD	                   K	
+                   D	                 0.5	            0.984578  *	            0.668996	            0.275417	
+                   F	           0.0154224  *	                 0.5	           0.0536739	         0.000428203***	
+                  FD	            0.331004	            0.946326	                 0.5	             0.14531	
+                   K	            0.724583	            0.999572***	             0.85469	                 0.5	
+
+===========================================================
+
+No age correction:
+Weighted MAE/correlation (testdata):  3.742/0.626
+Remove trend degree 1 using 30 subjects of site 1.
+
+Age correction using PredicatedAge (Cole):
+Weighted MAE/correlation (testdata):  3.339/0.626
+
+===========================================================
+Remove trend degree 1 using 30 subjects of site 1.
+-----------------------------------------------------------------
+Weighted MAE/correlation (testdata):  1.112/0.965
+-----------------------------------------------------------------
+Remove trend degree 1 using 30 subjects of site 1.
+
+T-test P-value (one-tailed) 
+               Group	                   D	                   F	                  FD	                   K	
+                   D	                 0.5	            0.917153	             0.64388	            0.792919	
+                   F	            0.082847	                 0.5	            0.194514	            0.116741	
+                  FD	             0.35612	            0.805486	                 0.5	            0.568271	
+                   K	            0.207081	            0.883259	            0.431729	                 0.5	
+               Group	                   D	                   F	                  FD	                   K	
+                Mean	               0.366	              -0.621	               0.098	               0.000	
+              Median	               0.069	              -0.573	               0.965	              -0.127	
+                  SD	               1.371	               2.391	               2.246	               1.371

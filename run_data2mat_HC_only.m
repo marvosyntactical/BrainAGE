@@ -6,9 +6,9 @@ release = '_CAT12.9';
 
 % Data folders to concatenate (order matters and must match label concatenation)
 D = struct();
-D.data    = { fullfile(base, 'D'), fullfile(base, 'F'), fullfile(base, 'FD'), fullfile(base, 'K')};  % change if you only have one group
+D.data    = { fullfile(base, 'K') };  % change if you only have one group
 D.release = release;
-D.name    = 'allgroups'; % base name for .mat outputs
+D.name    = 'healthycontrol'; % base name for .mat outputs
 
 % Choose segments and processing options
 D.seg  = {'rp1','rp2'};  % GM and WM copied as rp1_*, rp2_*
@@ -16,18 +16,13 @@ D.fwhm = {8};            % smoothing (mm)
 D.res  = {8};            % resampling (mm)
 
 % Load fake labels created by prepare_brainage.py
-age_D  = load(fullfile(base, 'labels', 'age_D.txt'));
-male_D = load(fullfile(base, 'labels', 'male_D.txt'));
-age_F  = load(fullfile(base, 'labels', 'age_F.txt'));
-male_F = load(fullfile(base, 'labels', 'male_F.txt'));
-age_FD  = load(fullfile(base, 'labels', 'age_FD.txt'));
-male_FD = load(fullfile(base, 'labels', 'male_FD.txt'));
+% age_D  = load(fullfile(base, 'fake_labels', 'age_D.txt'));
+% male_D = load(fullfile(base, 'fake_labels', 'male_D.txt'));
 age_K  = load(fullfile(base, 'labels', 'age_K.txt'));
 male_K = load(fullfile(base, 'labels', 'male_K.txt'));
 
-
-D.age  = [age_D; age_F; age_FD; age_K];   % concatenate in the same order as D.data
-D.male = [male_D; age_F; age_FD; male_K];
+D.age  = [age_K];   % concatenate in the same order as D.data
+D.male = [male_K];
 
 % Optional: restrict age range (keeps files/labels in sync)
 % D.age_range = [60 95];
